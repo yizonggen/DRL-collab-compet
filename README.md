@@ -66,6 +66,12 @@ The training hyperparameters are as follow :
 - weight decay : 0
 - noise decay : 0.99
 
+### Plot of rewards
+
+In the given training result, a reward score 1.0 (over 100 consecutive episodes, after taking the maximum over both agents) is used to assume the environment is sloved. We have solved this environment in 955 episodes. The plot of rewards are included here:
+
+![alt-text-1](plot_of_rewards.png)
+
 
 ### Ideas of future works
 
