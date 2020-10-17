@@ -36,43 +36,37 @@ Follow the instructions in `Tennis.ipynb` to get started with training the agent
 
 ### Learning algorithm
 
-The algorithm used here is a Multi-Agents Deep Deterministic Policy Gradient (MADDPG) [Ryan Lowe et al. “Multi-agent actor-critic for mixed cooperative-competitive environments”. In : Advances in Neural Information Processing Systems. 2017, p. 6379-6390.](https://arxiv.org/abs/1706.02275) A MADDPG is composed of multiple DDPG agents.
+The algorithm used here is a Multi-Agents Deep Deterministic Policy Gradient (MADDPG), A MADDPG is composed of multiple DDPG agents. The details of MADDPG can be referred in [Ryan Lowe et al. “Multi-agent actor-critic for mixed cooperative-competitive environments”. In : Advances in Neural Information Processing Systems. 2017, p. 6379-6390.](https://arxiv.org/abs/1706.02275) 
 
 During a step, the actors choose actions depending on their only observation. The critics however can use
 the whole state information and the actions of the other agents in order to better evaluate the optimal action
-value function.
+value function. This allows to better estimate future rewards as the critic learns to approximate the other agents’ strategies.
 
-This allows to better estimate future rewards as the critic learns to approximate the other agents’ strategies.
-The structure of each agents comes from the ddpg-pendulum project of the nanodegree. I add a MultiAgents
-class and modify the Agent class in order to take into account the share of information between agents.
+The architecture of the networks are as follow: 
 
-The algorithm is very unstable and was hard to train. Some small modifications changed a lot in the final result.
-
-
-For example I changes the noise and it helped a lot.
-
-The architecture of the networks are as follow ; the actor is composed of 3 fc units :
-— First layer : input size = 24 and output size = 256
-— Second layer : input size = 256 and output size = 128
-— Third layer : input size = 128 and output size = 4
+The actor is composed of 3 fc units :
+- First layer : input size = 24 and output size = 256
+- Second layer : input size = 256 and output size = 128
+- Third layer : input size = 128 and output size = 4
 
 The critic is composed of 3 fc units :
-— First layer : input size = 48 and output size = 256
-— Second layer : input size = 260 and output size = 128
-— Third layer : input size = 128 and output size = 1
+- First layer : input size = 48 and output size = 256
+- Second layer : input size = 260 and output size = 128
+- Third layer : input size = 128 and output size = 1
 
-The second layer takes as input the output of the first layer concatenated with the choosen actions.
+In the critic network, the second layer takes as input the output of the first layer concatenated with the choosen actions.
+
 The training hyperparameters are as follow :
-— Buffer size : 100,000
-— Batch size : 256
-— γ : 0.99
-— τ : 0.001
-— learning rate actor : 0.0001
-— learning rate critic : 0.0001
-— weight decay : 0
-— noise decay : 0.99
+- Buffer size : 100,000
+- Batch size : 256
+- GAMMA : 0.99
+- TAU : 0.001
+- learning rate actor : 0.0001
+- learning rate critic : 0.0001
+- weight decay : 0
+- noise decay : 0.99
 
 
 ### Ideas of future works
 
-A promising method that might be helpful and can improve the performance is AlphaZero [David Silver et al. “Mastering chess and shogi by self-play with a general reinforcement learning algorithm”](https://arxiv.org/abs/1712.01815)
+A promising method that might be helpful and can improve the performance is AlphaZero: [David Silver et al. “Mastering chess and shogi by self-play with a general reinforcement learning algorithm”](https://arxiv.org/abs/1712.01815)
